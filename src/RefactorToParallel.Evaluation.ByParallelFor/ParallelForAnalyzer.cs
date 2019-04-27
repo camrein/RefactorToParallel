@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace RefactorToParallel.Evaluation.ByParallelFor {
   /// <summary>
-  /// C# Syntax Analyzer that checks if there any for-loops which can be parallelized with Parallel.For.
+  /// C# Syntax Analyzer that identifies existing Parallel.For usages.
   /// </summary>
   [DiagnosticAnalyzer(LanguageNames.CSharp)]
   public class ParallelForAnalyzer : DiagnosticAnalyzer {
