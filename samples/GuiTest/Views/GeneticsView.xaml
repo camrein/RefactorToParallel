@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="GuiTest.Views.GeneticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GuiTest.Views"
+             xmlns:vm="clr-namespace:GuiTest.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+  <UserControl.DataContext>
+    <vm:GeneticsViewModel />
+  </UserControl.DataContext>
+  <StackPanel IsEnabled="{Binding Ready}" Grid.Row="1">
+    <Button IsEnabled="{Binding Ready}" Margin="1" Content="Evolve" Command="{Binding Evolve}"/>
+    <Label Content="{Binding Best}"/>
+    <Label Content="{Binding Statistics}"/>
+  </StackPanel>
+</UserControl>
