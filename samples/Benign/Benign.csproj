@@ -44,10 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ForEachLoop.cs" />
     <Compile Include="ForLoop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecialCases.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
