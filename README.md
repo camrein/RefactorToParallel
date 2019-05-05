@@ -14,6 +14,7 @@ The following list is a summary of improvements that could be applied to the cod
 - Correctly transform the compound assignment operators such as `+=` when generating the IR. Although, it is not relevant for the correctness of the prototype.
 - The implementations of the interprocedural analyses have transfer-functions that apply special state operations when transferring from and to an invoked method to avoid variable name conflicts between methods. A switch to symbols for variables instead of identifiers should make this obsolete.
 - Generate and optimize the IR of the methods lazily instead of eagerly.
+- Replace string based type-assertions with checks that are based on [Compilation.GetTypeByMetadataName](https://docs.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.compilation.gettypebymetadataname?view=roslyn-dotnet).
 
 # 2 Implementation Notes
 
