@@ -11,7 +11,7 @@ The following list is a summary of improvements that could be applied to the cod
 - Use Roslyn's cancellation token more thoroughly.
 - Use symbols in the intermediate representation instead of the identifiers.
 - Possibly use dedicated classes to represent 3AC instruction to reflect the simplifications instead of re-using the classes of the original IR.
-- Correctly transform the `+=` operator when generating the IR. Although, it is not relevant for the correctness of the prototype.
+- Correctly transform the compound assignment operators such as `+=` when generating the IR. Although, it is not relevant for the correctness of the prototype.
 - The implementations of the interprocedural analyses have transfer-functions that apply special state operations when transferring from and to an invoked method to avoid variable name conflicts between methods. A switch to symbols for variables instead of identifiers should make this obsolete.
 - Generate and optimize the IR of the methods lazily instead of eagerly.
 
