@@ -1,4 +1,4 @@
-# 1. RefactorToParallel
+# 1 RefactorToParallel
 
 Sourcecode of the prototype of the Master's Thesis Automatic Refactoring for Parallelization
 
@@ -12,7 +12,7 @@ plugin suggesting the parallelization opportunity](images/refactor_suggestion.pn
 
 In the upcoming Section 2.1, the steps the prototype uses for its analysis are explained.
 
-## 2.1. Analysis Steps
+## 2.1 Analysis Steps
 
 The prototype was designed in a way that the different parts (or steps) of the analysis are not crucial for the implementation and can be added gradually. This design choice was also the primary reason not to use an IR in the SSA form.
 
@@ -48,7 +48,7 @@ Besides the loop dependence analysis to identify array intersections, the protot
 
 Both analyses -the loop dependence and alias- support an inter-procedural analysis of the code. However, the inter-procedural analysis is only context-free. Moreover, only non-virtual methods without overloads are supported at this time. To achieve the inter-procedural analysis, the control flow graph of the loop's body is connected to the invoked methods to form one large control flow graph. Nevertheless, the necessary call graph edges are processed separately so the control flow graphs of the method bodies can be re-used across all present loops.
 
-# 3. Footnotes
+# 3 Footnotes
 
 1. Due to the late expansion to an inter-procedural analysis, it was implemented in a way it does not require cross-cutting changes to the existing code base.
 2. The prototype does not support jagged arrays. This feature would require a proof that all array elements are distinct. The same would apply to objects if member-accesses were supported.
