@@ -1,7 +1,19 @@
-# 1 RefactorToParallel
+# 1 About
 
-Sourcecode of the prototype of the Master's Thesis Automatic Refactoring for Parallelization
+This repository holds the source code of the prototype developed during the master's thesis [Automatic Refactoring for Parallelization](https://eprints.hsr.ch/760/). There is no intent to continue development of this refactoring tool at this time. The code of the analysis itself is located in the *src/* folder. The *samples/* folder holds a small project to demonstrate the refactoring provided by the prototype.
 
+The prototype incorporates implementations of various static code analyses such as Alias Analysis (interprocedural), Available Expressions Analysis, Loop Dependence Analysis (interprocedural, this thesis), and Reaching Definitions Analysis. Since some analyses profit from optimizations, the prototype also incorporates implementations of the Common Subexpression Elimination and Copy Propagation optimizations.
+
+## 1.1 Possible Implementation Improvements
+
+The following list is a summary of improvements that could be applied to the code:
+
+- Use Roslyn's cancellation token more thoroughly.
+- Use symbols in the intermediate representation instead of the identifiers.
+- Possibly use dedicated classes to represent 3AC instruction to reflect the simplifications instead of re-using the classes of the original IR.
+- Correctly transform the `+=` operator when generating the IR. Although, it is not relevant for the correctness of the prototype.
+- The implementations of the interprocedural analyses have transfer-functions that apply special state operations when transferring from and to an invoked method to avoid variable name conflicts between methods. A switch to symbols for variables instead of identifiers should make this obsolete.
+- Generate and optimize the IR lazily instead of eagerly.
 
 # 2 Implementation Notes
 
