@@ -3,7 +3,7 @@
 Sourcecode of the prototype of the Master's Thesis Automatic Refactoring for Parallelization
 
 
-# 2. Implementation Notes
+# 2 Implementation Notes
 
 The prototype is a static code analyzer available as a Visual Studio Plugin as well as a NuGet package. Its only dependency is the .NET Compiler Platform (Roslyn) which is used analyze arbitrary C# code. The Visual Studio integration allows just-in-time code analysis and automatically reports `for` loops that can be refactored to their `Parallel.For` counterpart safely. The following screenshot illustrates how the prototype informs about the parallelization opportunity including a preview of the code changes.
 
