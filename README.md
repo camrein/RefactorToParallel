@@ -5,7 +5,7 @@ Sourcecode of the prototype of the Master's Thesis Automatic Refactoring for Par
 
 # 2. Implementation Notes
 
-The prototype is a static code analyzer available as a Visual Studio<sup>1</sup> Plugin as well as a NuGet<sup>2</sup> package. Its only dependency is the .NET Compiler Platform (Roslyn)<sup>3</sup> which is used analyze arbitrary C# code. The Visual Studio integration allows just-in-time code analysis and automatically reports `for` loops that can be refactored to their `Parallel.For`<sup>4</sup> counterpart safely. The following screenshot illustrates how the prototype informs about the parallelization opportunity including a preview of the code changes.
+The prototype is a static code analyzer available as a Visual Studio Plugin as well as a NuGet package. Its only dependency is the .NET Compiler Platform (Roslyn) which is used analyze arbitrary C# code. The Visual Studio integration allows just-in-time code analysis and automatically reports `for` loops that can be refactored to their `Parallel.For` counterpart safely. The following screenshot illustrates how the prototype informs about the parallelization opportunity including a preview of the code changes.
 
 ![Visual Studio screenshot illustrating the
 plugin suggesting the parallelization opportunity](images/refactor_suggestion.png)
@@ -40,20 +40,16 @@ One semantic proof ensures that the element access operator is used solely for a
 
 Upon the three-address code, the prototype runs five optimization iterations at most. This number appears to be sufficient since none of the reviewed codes required more iterations. Nevertheless, a smaller iteration maximum could be adequate too. The optimizations include a copy propagation and a common sub-expression elimination.
 
-The common sub-expression elimination has been further extended to automatically eliminate multiple invocations of the same method having the same arguments. Because of the design<sup>5</sup> and the context-freeness of the inter-procedural analysis, this extension improves the results significantly. However, this is only valid due to the restrictions on the invoked methods. For instance, a method may not access array instances which are not passed as an argument. Moreover, methods may not have any side-effects except for write-accesses to arrays.
+The common sub-expression elimination has been further extended to automatically eliminate multiple invocations of the same method having the same arguments. Because of the design<sup>1</sup> and the context-freeness of the inter-procedural analysis, this extension improves the results significantly. However, this is only valid due to the restrictions on the invoked methods. For instance, a method may not access array instances which are not passed as an argument. Moreover, methods may not have any side-effects except for write-accesses to arrays.
 
 ### 2.5 Analysis
 
-Besides the loop dependence analysis to identify array intersections, the prototype employs an alias analysis. This analysis is used to identify aliasing of arrays inside the currently analyzed for loop. However, arrays may already alias each other outside of the loop. Therefore, the prototype also identifies possible aliasing of arrays outside of the loop. To do so, it conservatively proofs that array variables may not alias each other with the application of different rules. For example, if arrays have different dimensions<sup>6</sup> or incompatible types. If it fails to disprove the possible aliasing, the worst-case scenario is assumed, this means it is assumed that the arrays alias.
+Besides the loop dependence analysis to identify array intersections, the prototype employs an alias analysis. This analysis is used to identify aliasing of arrays inside the currently analyzed for loop. However, arrays may already alias each other outside of the loop. Therefore, the prototype also identifies possible aliasing of arrays outside of the loop. To do so, it conservatively proofs that array variables may not alias each other with the application of different rules. For example, if arrays have different dimensions<sup>2</sup> or incompatible types. If it fails to disprove the possible aliasing, the worst-case scenario is assumed, this means it is assumed that the arrays alias.
 
 Both analyses -the loop dependence and alias- support an inter-procedural analysis of the code. However, the inter-procedural analysis is only context-free. Moreover, only non-virtual methods without overloads are supported at this time. To achieve the inter-procedural analysis, the control flow graph of the loop's body is connected to the invoked methods to form one large control flow graph. Nevertheless, the necessary call graph edges are processed separately so the control flow graphs of the method bodies can be re-used across all present loops.
 
-## 3. Sources / Footnotes
+# 3. Footnotes
 
-1. [Visual Studio](https://www.visualstudio.com)
-2. [NuGet](https://www.nuget.org/)
-3. [.NET Compiler Platform (Roslyn)](https://github.com/dotnet/roslyn)
-4. [Parallel.For Method](https://msdn.microsoft.com/en-us/library/system.threading.tasks.parallel.for(v=vs.110).aspx)
-5. Due to the late expansion to an inter-procedural analysis, it was implemented in a way it does not require cross-cutting changes to the existing code base.
-6. The prototype does not support jagged arrays. This feature would require a proof that all array elements are distinct. The same would apply to objects if member-accesses were supported.
+1. Due to the late expansion to an inter-procedural analysis, it was implemented in a way it does not require cross-cutting changes to the existing code base.
+2. The prototype does not support jagged arrays. This feature would require a proof that all array elements are distinct. The same would apply to objects if member-accesses were supported.
 
